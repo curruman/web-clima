@@ -2,7 +2,7 @@ package modelo;
 
 public class Ciudad {
 	private int id;
-	private int pais;
+	private Pais pais;
 	private String nombre;
 	public int getId() {
 		return id;
@@ -10,10 +10,10 @@ public class Ciudad {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getPais() {
+	public Pais getPais() {
 		return pais;
 	}
-	public void setPais(int pais) {
+	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
 	public String getNombre() {

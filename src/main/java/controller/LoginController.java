@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.Ciudad;
 import modelo.Pais;
+import modelo.Usuario;
+import services.CiudadServices;
 
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {
@@ -18,11 +22,12 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		CiudadServices service = new CiudadServices();
+		List<Pais> paises = service.getPaises();
+				
+		req.getSession().setAttribute("paises", paises);
+		
 		resp.sendRedirect("Login.jsp");
-		req.getSession();
-		Collection<Pais> paises = getPaises();
-		req.setAttribute("paises", paises);
 	}
 	
 	@Override
@@ -31,10 +36,20 @@ public class LoginController extends HttpServlet {
 		String user = (String) req.getParameter("exampleInputEmail1");
 		String password = (String) req.getParameter("exampleInputPassword1");
 		int pais = Integer.valueOf(req.getParameter("Seleccion"));
-		super.doPost(req, resp);
+		
+		CiudadServices service = new CiudadServices();
+		List<Ciudad> ciudades = service.getCiudades(pais);
+		
+		Usuario usuario = new Usuario();
+		usuario.setUser(user);
+		
+		req.getSession().setAttribute("usuario", usuario);
+		req.getSession().setAttribute("ciudades", ciudades);
+		resp.sendRedirect("Preferences.jsp");
+		//super.doPost(req, resp);
 	}
 
-	private Collection<Pais> getPaises(){
+/*	public Collection<Pais> getPaises(){
 		Collection<Pais> ListaPaises = new ArrayList();
 		Pais arg = new Pais();
 		arg.setId(1);
@@ -58,6 +73,6 @@ public class LoginController extends HttpServlet {
 		ListaPaises.add(chi);
 		return ListaPaises;
 	}
-	
+	*/
 
 }

@@ -11,10 +11,10 @@
 </head>
 <body>
 
-<form action = "/Login">
+<form action = "Login" method="post"">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div class="form-group">
@@ -23,12 +23,12 @@
   </div>
 	<div class="form-group">
 		<%
-			List<Pais> paises = (List<Pais>)session.getAttribute("paises");
+			List<Pais> paises = (List<Pais>) session.getAttribute("paises");
  		%>
-		<select class="form-control form-control-lg" id ="Seleccion">
+		<select class="form-control form-control-lg" id ="Seleccion" name = "Seleccion">
 			<%
 				for(Pais p: paises){ %>
-				<option id="<%= p.getId() %>"> <%= p.getNombre() %></option>	
+				<option value="<%= p.getId() %>" id="<%= p.getId() %>" ><%= p.getNombre() %></option>
 				
 				<%} %>
 			
