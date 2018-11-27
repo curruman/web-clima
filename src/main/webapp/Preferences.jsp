@@ -1,6 +1,7 @@
 <%@page import="services.CiudadServices"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Usuario"%>
+<%@page import="modelo.Ciudad"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -52,11 +53,11 @@
 				</div>
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">Seleccione Ciudad</label>
-					<%List<CiudadServices> ciudad = (List<CiudadServices>)session.getAttribute("ciudades"); %> 
+					<%List<Ciudad> ciudades = (List<Ciudad>)session.getAttribute("ciudades"); %> 
 					<select class="form-control" id="exampleFormControlSelect1" name="exampleFormControlSelect1">
 						<%
-						for(CiudadServices c: ciudades){ %>
-						<option value="<%= c.getCiudades(idPais) %>" id="<%= p.getId() %>" ><%= p.getNombre() %></option>
+						for(Ciudad c: ciudades){ %>
+						<option value="<%= c.getId() %>" ><%= c.getNombre() %></option>
 						
 						<%} %>
 				
